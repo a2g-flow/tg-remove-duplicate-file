@@ -12,7 +12,7 @@ logging.basicConfig(
     datefmt="%d-%b-%y %H:%M:%S",
     filename='logfile.log',
 )
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
+logging.getLogger("pyrogram").setLevel(logging.DEBUG)
 
 #logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
 #level=logging.DEBUG)
@@ -27,10 +27,10 @@ SESSION = config("SESSION")
 CHAT_LIST = config("CHAT_LIST")
 
 client = TelegramClient(StringSession(SESSION), APP_ID, API_HASH)
-#SESSION = client.session.save()
+SESSION = client.session.save()
 #with TelegramClient('viperdupes', APP_ID, API_HASH) as client:
      #print(client.session.save())
-#chat_list = ['']  
+CHAT_LIST = ['https://t.me/+ARvYdn7lqJN']  
 
 # calculate file size
 def convert_size(text):
@@ -121,7 +121,7 @@ async def handler(update):
             
 
 async def init():
-     bar = tqdm(chat_list)
+     bar = tqdm(CHAT_LIST)
      for i in bar:
          entity = await client.get_entity(i)
          file_list[entity.id] = [] # Initialize each group file list
@@ -139,14 +139,10 @@ async def init():
              bar.set_description('Group: {} Initialize check for duplicate files, check quantity: {}, delete: {}'.format(entity.title, total, delete))
         
      return False
-
-#client = TelegramClient('bot', api_id, api_hash)
 with client:
      print("Initialize check for duplicate files")
      client.loop.run_until_complete(init())
-
-     #print("Start listening for new messages:")
+     
+     print("Start listening for new messages:")
      client.add_event_handler(handler)
      client.run_until_disconnected()
-
-      
