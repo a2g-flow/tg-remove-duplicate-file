@@ -24,13 +24,13 @@ queue = asyncio. Queue()
 APP_ID = config("APP_ID", default=None, cast=int)
 API_HASH = config("API_HASH", default=None)
 SESSION = config("SESSION")
-chat_list = config("chat_list")
+CHAT_LIST = config("CHAT_LIST")
 
 client = TelegramClient(StringSession(SESSION), APP_ID, API_HASH)
 #SESSION = client.session.save()
 #with TelegramClient('viperdupes', APP_ID, API_HASH) as client:
      #print(client.session.save())
-chat_list = ['https://t.me/+ARvYdn7lqJNlYWRk']  
+#chat_list = ['']  
 
 # calculate file size
 def convert_size(text):
@@ -94,7 +94,7 @@ def check_duplicate_file(message, entity):
 
 file_list = {} # record file id
 
-@events.register(events.NewMessage(chats=tuple(chat_list)))
+@events.register(events.NewMessage(chats=tuple(CHAT_LIST)))
 async def handler(update):
      # get group new information
      chat_id = update.message.to_id
