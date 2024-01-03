@@ -138,6 +138,7 @@ async def init():
              bar.set_description('Group: {} Initialize check for duplicate files, check quantity: {}, delete: {}'.format(entity.title, total, delete))
         
      return False
+    client = TelegramClient('bot', api_id, api_hash)
 with client:
      print("Initialize check for duplicate files")
      client.loop.run_until_complete(init())
