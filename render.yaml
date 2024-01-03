@@ -6,7 +6,7 @@ services:
     #buildCommand: pip install -U -r requirements.txt
     #startCommand: gunicorn app:app & python3 -m Zaid
     repo: https://github.com/a2g-flow/tg-remove-duplicate-file      
-    branch: master
+    branch: Render
     envVars:
       - key: SESSION 
         sync: false
